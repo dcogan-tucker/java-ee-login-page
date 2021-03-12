@@ -47,7 +47,7 @@ public class LoginBean {
                 facesContext.responseComplete();
                 break;
             case SEND_FAILURE:
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Unsuccessful", null));
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Unsuccessful, username or password are incorrect.", null));
                 break;
             case SUCCESS:
                 externalContext.redirect(externalContext.getRequestContextPath() + "/view/welcome.xhtml");

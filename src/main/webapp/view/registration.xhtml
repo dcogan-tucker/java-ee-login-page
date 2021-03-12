@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:body>
+        <ui:composition template="/WEB-INF/templates/template.xhtml">
+            <ui:define name="content">
+                <div>
+                    <h1>Register User</h1>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Username: "/>
+                            <h:inputText id="username" value="#{registrationBean.user.username}"/>
+                            <h:outputLabel value="Password: "/>
+                            <h:inputSecret id="password" value="#{registrationBean.user.password}"/>
+                            <h:outputLabel value="First Name: "/>
+                            <h:inputText id="firstName" value="#{registrationBean.user.firstName}"/>
+                            <h:outputLabel value="Last Name: "/>
+                            <h:inputText id="lastName" value="#{registrationBean.user.lastName}"/>
+                            <h:outputLabel value="Role"/>
+                            <h:selectOneMenu value="#{registrationBean.user.role}">
+                                <f:selectItem itemValue="USER" itemLabel="USER"/>
+                                <f:selectItem itemValue="ADMIN" itemLabel="ADMIN"/>
+                            </h:selectOneMenu>
+                            <h:commandButton value="Back" action="admin?faces-redirect=true"/>
+                            <h:commandButton value="Register" action="#{registrationBean.register}"/>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

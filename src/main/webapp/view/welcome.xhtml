@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html class="h-100"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<f:view>
-    <h:head>
-        <h1>Welcome Page</h1>
-    </h:head>
+<h:head>
+    <f:metadata charset="utf-8"/>
+    <f:metadata name="viewport" content="width=device-width, initial-scale=1"/>
+    <f:metadata http-equiv="X-UA-Conpatible" content="IE=edge" />
 
-    <h:body>
-        <ui:composition template="../WEB-INF/templates/template.xhtml">
-            <ui:define name="content">
-                <div>
-                    <h1>Welcome #{request.userPrincipal.name}</h1>
-                    <h:form>
-                        <h:commandButton value="Admin" action="admin?faces-redirect=true"/>
-                        <br/>
-                        <h:commandButton value="Logout" action="#{loginBean.logout}"/>
-                    </h:form>
-                </div>
-            </ui:define>
-        </ui:composition>
-    </h:body>
-</f:view>
+    <h:outputStylesheet library="webjars" name="bootstrap/5.0.0-beta2/css/bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="cover.css"/>
+    <title>Home</title>
+</h:head>
+<h:body class="d-flex h-100 text-center text-white bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <div class="header mb-auto">
+            <h:graphicImage styleClass="float-md-start" library="images" name="sparta-global-logo" width="33" height="33"/>
+            <h3 class="float-md-start mb-0">Home Page</h3>
+            <div class="nav nav-masthead justify-content-center float-md-end">
+                <h:form>
+                    <h:commandLink styleClass="nav-link p-2" value="Admin" action="admin.xhtml" rendered="#{request.isUserInRole('ADMIN')}"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink styleClass="nav-link p-2" value="Logout"  action="#{loginBean.logout}"/>
+                </h:form>
+            </div>
+        </div>
+
+        <div class="px-3">
+            <h1>Welcome #{request.userPrincipal.name}</h1>
+            <p class="lead">This is your homepage!</p>
+            <p class="lead">
+
+            </p>
+        </div>
+
+        <div class="footer mt-auto text-white-50">
+        </div>
+    </div>
+    <h:outputScript name="webjars/popper.js/2.5.4/umd/popper.min.js"/>
+    <h:outputScript name="webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js"/>
+</h:body>
 </html>

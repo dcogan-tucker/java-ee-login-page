@@ -4,18 +4,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <ui:composition template="/WEB-INF/templates/template.xhtml">
-        <ui:define name="content">
-            <div>
-                <h1>Welcome to the Admin Page, #{request.userPrincipal.name}</h1>
-                <h:form>
-                    <h:commandButton value="Register User" action="registration?faces-redirect=true"/>
-                    <h:commandButton value="Back" action="welcome.xhtml"/>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <f:metadata charset="UTF-8"/>
+    <f:metadata name="viewport" content="width=device-width, initial-scale=1"/>
+    <f:metadata http-equiv="X-UA-Conpatible" content="IE=edge" />
+
+    <h:outputStylesheet library="webjars" name="bootstrap/5.0.0-beta2/css/bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="login.css"/>
+    <title>Admin</title>
+</h:head>
+<body class="text-white bg-dark">
+    <div class="fixed-top navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand">Admin Page</a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <h:form>
+                            <h:commandLink class="nav-link" value="Home" action="welcome.xhtml"/>
+
+                        </h:form>
+                    </li>
+                    <li class="nav-item">
+                        <h:form>
+                            <h:commandLink class="nav-link active" value="Admin" action="#"/>
+                        </h:form>
+                    </li>
+                    <li class="nav-item">
+                        <h:form>
+                            <h:commandLink class="nav-link" value="Register User" action="registration.xhtml"/>
+                        </h:form>
+                    </li>
+                </ul>
+                <h:form class="d-flex">
+                    <h:inputText class="form-control me-2" p:placeholder="Search User"/>
+                    <h:commandButton class="btn btn-outline-success" value="Search" action="#"/>
                 </h:form>
             </div>
-        </ui:define>
-    </ui:composition>
-</f:view>
+        </div>
+    </div>
+
+    <div class="mx-auto px-3">
+        <h1>Welcome to the admin page!</h1>
+    </div>
+
+    <div class="footer mt-auto text-white-50">
+    </div>
+
+    <h:outputScript name="webjars/popper.js/2.5.4/umd/popper.min.js"/>
+    <h:outputScript name="webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js"/>
+</body>
 </html>

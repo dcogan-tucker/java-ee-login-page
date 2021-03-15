@@ -13,26 +13,25 @@ import java.util.Collection;
 @RequestScoped
 public class UserService {
 
-    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
-    private EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+    private final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     public Collection<User> getAllUsers() {
         return entityManager.createNamedQuery("getAllUsers", User.class).getResultList();
     }
 
     public User getUserByID(int id) {
-        return entityManager.createNamedQuery("getUserByID", User.class).getSingleResult();
+        return entityManager.createNamedQuery("getUserByID", User.class).setParameter("id", id).getSingleResult();
     }
 
     public User getUserByUsername(String username) {
-        return entityManager.createNamedQuery("getUserByUsername", User.class).getSingleResult();
+        return entityManager.createNamedQuery("getUserByUsername", User.class).setParameter("username", username).getSingleResult();
     }
 
     public void addUser(User user) {
         entityManager.getTransaction().begin();
         entityManager.persist(user);
         entityManager.flush();
-        entityManager.refresh(user);
         entityManager.getTransaction().commit();
     }
 }

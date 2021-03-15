@@ -4,35 +4,72 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:body>
-        <ui:composition template="/WEB-INF/templates/template.xhtml">
-            <ui:define name="content">
-                <div>
-                    <h1>Register User</h1>
-                    <h:form>
-                        <h:panelGrid columns="2">
-                            <h:outputLabel value="Username: "/>
-                            <h:inputText id="username" value="#{registrationBean.user.username}"/>
-                            <h:outputLabel value="Password: "/>
-                            <h:inputSecret id="password" value="#{registrationBean.user.password}"/>
-                            <h:outputLabel value="First Name: "/>
-                            <h:inputText id="firstName" value="#{registrationBean.user.firstName}"/>
-                            <h:outputLabel value="Last Name: "/>
-                            <h:inputText id="lastName" value="#{registrationBean.user.lastName}"/>
-                            <h:outputLabel value="Role"/>
-                            <h:selectOneMenu value="#{registrationBean.user.role}">
-                                <f:selectItem itemValue="USER" itemLabel="USER"/>
-                                <f:selectItem itemValue="ADMIN" itemLabel="ADMIN"/>
-                            </h:selectOneMenu>
-                            <h:commandButton value="Back" action="admin?faces-redirect=true"/>
-                            <h:commandButton value="Register" action="#{registrationBean.register}"/>
-                        </h:panelGrid>
-                    </h:form>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <f:metadata charset="UTF-8"/>
+    <f:metadata name="viewport" content="width=device-width, initial-scale=1"/>
+    <f:metadata http-equiv="X-UA-Conpatible" content="IE=edge" />
+
+    <h:outputStylesheet library="webjars" name="bootstrap/5.0.0-beta2/css/bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="login.css"/>
+    <title>Register</title>
+</h:head>
+<body class="text-white bg-dark">
+    <div class="fixed-top navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand">Admin Page</a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <h:form>
+                            <h:commandLink class="nav-link" value="Home" action="welcome.xhtml"/>
+
+                        </h:form>
+                    </li>
+                    <li class="nav-item">
+                        <h:form>
+                            <h:commandLink class="nav-link" value="Admin" action="admin?faces-redirect=true"/>
+                        </h:form>
+                    </li>
+                    <li class="nav-item">
+                        <h:form>
+                            <h:commandLink class="nav-link active" value="Register User" action="#"/>
+                        </h:form>
+                    </li>
+                </ul>
+                <h:form class="d-flex">
+                    <h:inputText class="form-control me-2" p:placeholder="Search User"/>
+                    <h:commandButton class="btn btn-outline-success" value="Search" action="#"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
+    <div class="text-center form-signin px-3">
+        <h2>Register User</h2>
+        <h:form>
+            <h:inputText styleClass="form-control mb-2" id="username" value="#{registrationBean.user.username}" p:placeholder="Username"/>
+            <h:inputSecret styleClass="form-control mb-2" id="password" value="#{registrationBean.user.password}" p:placeholder="Password"/>
+            <h:inputText styleClass="form-control mb-2" id="firstName" value="#{registrationBean.user.firstName}" p:placeholder="First Name"/>
+            <h:inputText styleClass="form-control mb-2" id="lastName" value="#{registrationBean.user.lastName}" p:placeholder="Last Name"/>
+            <h:selectOneMenu styleClass="form-control mb-2" value="#{registrationBean.user.role}" p:placeholder="ROLE">
+                <f:selectItem itemValue="USER" itemLabel="USER"/>
+                <f:selectItem itemValue="ADMIN" itemLabel="ADMIN"/>
+            </h:selectOneMenu>
+            <h:commandButton styleClass="w-75 btn btn-lg btn-primary" value="Register" action="#{registrationBean.register}"/>
+            <ui:repeat value="#{facesContext.messageList}" var="facesMessage">
+                <div class="alert alert-danger">
+                    #{facesMessage.summary}
                 </div>
-            </ui:define>
-        </ui:composition>
-    </h:body>
-</f:view>
+            </ui:repeat>
+        </h:form>
+    </div>
+
+    <div class="footer mt-auto text-white-50">
+    </div>
+
+    <h:outputScript name="webjars/popper.js/2.5.4/umd/popper.min.js"/>
+    <h:outputScript name="webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js"/>
+</body>
 </html>

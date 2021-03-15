@@ -1,4 +1,4 @@
-package com.sparta.dominic.user_login_project.authentication;
+package com.sparta.dominic.user_login_project.bean;
 
 import com.sparta.dominic.user_login_project.entities.User;
 import com.sparta.dominic.user_login_project.services.UserService;
@@ -48,27 +48,26 @@ public class RegistrationBean {
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registration Successful.", null));
             externalContext.redirect(externalContext.getRequestContextPath() + "/view/admin.xhtml");
         } else {
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "RegistrationUnsuccessful.", null));
-            externalContext.redirect(externalContext.getRequestContextPath());
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration Unsuccessful.", null));
         }
     }
 
     private boolean validateRegistration() {
         boolean registrationSuccess = true;
         if (!validateUsername()) {
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username already taken.", null));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Username already taken.", null));
             registrationSuccess = false;
         }
         if (!validatePassword()) {
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password does not meet criteria.", null));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Password does not meet criteria.", null));
             registrationSuccess = false;
         }
         if (!validateName(getUser().getFirstName())) {
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "First name must be at least 2 characters long.", null));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "First name must be at least 2 characters long.", null));
             registrationSuccess = false;
         }
         if (!validateName(getUser().getLastName())) {
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Last name must be at least 2 characters long.", null));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Last name must be at least 2 characters long.", null));
             registrationSuccess = false;
         }
         return registrationSuccess;

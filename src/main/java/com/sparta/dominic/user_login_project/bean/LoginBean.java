@@ -1,4 +1,4 @@
-package com.sparta.dominic.user_login_project.authentication;
+package com.sparta.dominic.user_login_project.bean;
 
 import com.sparta.dominic.user_login_project.entities.User;
 
@@ -41,13 +41,13 @@ public class LoginBean {
         this.user = user;
     }
 
-    public void login() throws IOException, ServletException {
+    public void login() throws IOException {
         switch (continueAuthentication()) {
             case SEND_CONTINUE:
                 facesContext.responseComplete();
                 break;
             case SEND_FAILURE:
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Unsuccessful, username or password are incorrect.", null));
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Unsuccessful, username and/or password were incorrect.", null));
                 break;
             case SUCCESS:
                 externalContext.redirect(externalContext.getRequestContextPath() + "/view/welcome.xhtml");

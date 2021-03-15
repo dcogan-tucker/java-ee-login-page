@@ -4,27 +4,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
-<f:view>
-    <h:body>
-        <ui:composition template="WEB-INF/templates/template.xhtml">
-            <ui:define name="content">
-                <div>
-                    <h:form id="login">
-                        <h:panelGrid columns="2">
-                            <h:outputLabel value="Username: "/>
-                            <h:inputText value="#{loginBean.user.username}"
-                                         required="true" requiredMessage="Username is required"/>
-                            <h:outputLabel value="Password: "/>
-                            <h:inputSecret value="#{loginBean.user.password}"
-                                        required="true" requiredMessage="Password is required"/>
-                            <h:commandButton id="loginButton" value="Login" action="#{loginBean.login}"/>
-                        </h:panelGrid>
-                    </h:form>
+<h:head>
+    <f:metadata charset="UTF-8"/>
+    <f:metadata name="viewport" content="width=device-width, initial-scale=1"/>
+    <f:metadata http-equiv="X-UA-Conpatible" content="IE=edge" />
+
+    <h:outputStylesheet library="webjars" name="bootstrap/5.0.0-beta2/css/bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="login.css"/>
+    <title>Login</title>
+</h:head>
+<h:body styleClass="text-center text-white bg-dark">
+    <div class="form-signin">
+        <h:form>
+            <h:graphicImage styleClass="mb-4" library="images" name="sparta-global-logo" width="72" height="72"/>
+            <h1 class="h3 mb-3 fw-normal">Please Sign In</h1>
+            <h:inputText id="inputUsername" styleClass="form-control mb-2"  value="#{loginBean.user.username}"
+                         required="true" p:placeholder="Username" requiredMessage="Username is required"/>
+            <h:inputSecret id="inputPassword" styleClass="form-control" value="#{loginBean.user.password}"
+                           required="true" p:placeholder="Password" requiredMessage="Password is required"/>
+            <h:commandButton styleClass="mb-4 w-75 btn btn-lg btn-primary" id="loginButton" value="Login" action="#{loginBean.login}"/>
+            <ui:repeat value="#{facesContext.messageList}" var="facesMessage">
+                <div class="alert alert-danger">
+                    #{facesMessage.summary}
                 </div>
-            </ui:define>
-        </ui:composition>
-    </h:body>
-</f:view>
+            </ui:repeat>
+        </h:form>
+    </div>
+    <h:outputScript name="webjars/popper.js/2.5.4/umd/popper.min.js"/>
+    <h:outputScript name="webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js"/>
+</h:body>
 </html>
